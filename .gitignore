@@ -1,5 +1,4 @@
 __pycache__
 .pytest_cache
-.env.dev
+env.dev
 .env.prod
-poetry.lock
