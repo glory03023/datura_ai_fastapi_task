@@ -26,3 +26,13 @@ To set up this project, follow these steps:
 glory03023git clone https://github.com/glory03023/datura_ai_fastapi_task.git
 cd datura_ai_fastapi_task
 docker-compose up --build
+```
+or
+```bash
+glory03023git clone https://github.com/glory03023/datura_ai_fastapi_task.git
+cd datura_ai_fastapi_task
+poetry install
+poetry run uvicorn main:app --host 0.0.0.0 --port 9001
+celery -A celery_worker worker --loglevel=info
+```
+Please check apis on http://45.23.20.2:9001/docs
