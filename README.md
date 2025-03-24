@@ -23,5 +23,6 @@ To set up this project, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/datura-ai-fastapi-task.git
-cd datura-ai-fastapi-task
+glory03023git clone https://github.com/glory03023/datura_ai_fastapi_task.git
+cd datura_ai_fastapi_task
+docker-compose up --build
