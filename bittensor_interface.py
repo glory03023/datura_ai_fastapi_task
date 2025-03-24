@@ -2,7 +2,6 @@ import asyncio
 from async_substrate_interface.async_substrate import AsyncSubstrateInterface
 from bittensor.core.settings import SS58_FORMAT
 from bittensor.core.chain_data import decode_account_id
-from bittensor_wallet import Wallet
 from redis_interface import get_redis_connection
 
 async def get_tao_dividend_from_netuid_address(netuid, address):
