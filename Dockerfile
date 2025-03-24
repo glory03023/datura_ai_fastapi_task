@@ -5,7 +5,7 @@ FROM python:3.10-slim
 ENV PYTHONUNBUFFERED=1
 
 # Set the working directory in the container
-WORKDIR /app
+# WORKDIR /app
 
 # Install system dependencies for Poetry and any other dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,16 +16,16 @@ RUN apt-get update && apt-get install -y \
 # Install Poetry
 RUN pip install poetry
 
-RUN chmod -R 755 /app
+# RUN chmod -R 755 /app
 # Copy the poetry configuration files
-COPY pyproject.toml poetry.lock /app/
+# COPY pyproject.toml poetry.lock /app/
 
 # Install Python dependencies with Poetry
 RUN poetry install --no-interaction
 
 RUN poetry add pycryptodome=3.18.0
 # Copy the application code into the container
-COPY . /app/
+# COPY . /app/
 
 # Expose port 8000 (default FastAPI port)
 EXPOSE 9001
