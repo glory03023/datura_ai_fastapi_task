@@ -1,41 +1,28 @@
 version: '3.8'
 
 services:
-  # Redis service (for Celery broker)
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
-
-  # MongoDB service
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
-    ports:
-      - "27017:27017"
-
-  # FastAPI app (main service)
   fastapi:
     build:
       context: .
-    container_name: fastapi
     ports:
-      - "9001:9001"
-    depends_on:
-      - redis
-      - mongo
-    command: ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9001"]
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    networks:
+      - mynetwork
+    environment:
+      - FASTAPI_ENV=production
 
-  # Celery worker service
-  celery:
-    build:
-      context: .
-    container_name: celery
-    depends_on:
-      - redis
-      - fastapi
-    command: ["poetry", "run", "celery", "-A", "celery_worker", "worker", "--loglevel=info"]
+  redis:
+    image: redis:latest
+    networks:
+      - mynetwork
+
+  mongo:
+    image: mongo:latest
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
