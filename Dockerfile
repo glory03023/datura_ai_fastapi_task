@@ -16,11 +16,10 @@ RUN apt-get update && apt-get install -y \
 # Install Poetry
 RUN pip install poetry
 
-# Ensure the target directory exists and has proper permissions
-RUN mkdir -p /app && chmod 755 /app
+RUN chmod -R 755 /app
+# Copy the poetry configuration files
+COPY pyproject.toml poetry.lock /app/
 
-# Copy the pyproject.toml and poetry.lock with correct permissions
-COPY --chown=youruser:yourgroup pyproject.toml poetry.lock /app/
 # Install Python dependencies with Poetry
 RUN poetry install --no-interaction
 
